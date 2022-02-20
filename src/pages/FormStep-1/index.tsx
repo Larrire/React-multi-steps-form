@@ -1,14 +1,32 @@
 import * as C from './styles';
 import { Theme } from '../../components/Theme';
 import { useHistory } from 'react-router-dom'
+import { useForm, FormActions } from '../../contexts/FormContext';
+import { ChangeEvent, useEffect } from 'react';
 
 export const FormStepOne = () => {
 
   const history = useHistory();
+  const { state, dispatch } = useForm();
 
   const handleNextStep = () => {
+    if( !state.name.trim() ) return;
     history.push('/step-two');
   }
+
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setName,
+      payload: event.target.value
+    })
+  }
+
+  useEffect(() => {
+    dispatch({
+      type: FormActions.setCurrentStep,
+      payload: 2
+    })
+  }, [dispatch])
 
   return (
     <Theme>
@@ -24,6 +42,8 @@ export const FormStepOne = () => {
           <input 
             type="text"
             autoFocus
+            value={state.name}
+            onChange={handleNameChange}
           />
         </label>
 
