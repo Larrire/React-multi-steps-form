@@ -10,7 +10,7 @@ export const FormStepOne = () => {
   const { state, dispatch } = useForm();
 
   const handleNextStep = () => {
-    if( !state.name.trim() ) return;
+    if ( !nameIsValid(state.name) ) return invalidNameWarning();
     history.push('/step-two');
   }
 
@@ -24,7 +24,7 @@ export const FormStepOne = () => {
   useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
-      payload: 2
+      payload: 1
     })
   }, [dispatch])
 
@@ -52,3 +52,7 @@ export const FormStepOne = () => {
     </Theme>
   )
 }
+
+const nameIsValid = (name:string) => (name.trim());
+
+const invalidNameWarning = () => alert("Digite seu nome completo para prosseguir!");
