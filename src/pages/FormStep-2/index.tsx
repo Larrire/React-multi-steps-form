@@ -11,7 +11,7 @@ export const FormStepTwo = () => {
   const { state, dispatch } = useForm();
 
   const handleNextStep = () => {
-    
+    history.push('/step-three');
   }
 
   const setLevel = ( level: number ) => {
