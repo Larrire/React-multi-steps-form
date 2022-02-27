@@ -14,7 +14,6 @@ type State = {
 type Action = {
   type: FormActions,
   payload: any,
-
 }
 
 type ContextType = {
