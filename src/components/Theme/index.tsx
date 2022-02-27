@@ -2,12 +2,15 @@ import * as C from './styles';
 import { Header } from '../Header';
 import { ReactNode } from 'react';
 import { SidebarItem } from '../SideBarItem';
+import { useForm } from '../../contexts/FormContext';
 
 type Props = {
   children: ReactNode
 }
 
 export const Theme = ({children}: Props) => {
+  const { state } = useForm();
+  
   return (
     <C.Container>
       <C.Area>
@@ -21,6 +24,7 @@ export const Theme = ({children}: Props) => {
               description="Se identifique"
               icon="profile"
               path="/"
+              active={state.currentStep===1}
             />
 
             <SidebarItem 
@@ -28,6 +32,7 @@ export const Theme = ({children}: Props) => {
               description="Seu nível"
               icon="book"
               path="/step-two"
+              active={state.currentStep===2}
             />
 
             <SidebarItem 
@@ -35,6 +40,7 @@ export const Theme = ({children}: Props) => {
               description="Como te achamos"
               icon="mail"
               path="/step-three"
+              active={state.currentStep===3}
             />
 
           </C.Sidebar>
