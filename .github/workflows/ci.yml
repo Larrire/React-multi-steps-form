@@ -1,0 +1,42 @@
+name: Live 05 Ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '16.x'
+        cache: 'npm'
+
+    - run: npm pkg delete scripts.useless
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile
+
+    - name: Linting
+      run: yarn ci:lint
+
+    - name: Typechecking
+      run: yarn typecheck
+
+    - name: Tests
+      run: yarn ci:test
+
+    # - name: Install dependencies
+    #   run: npm clean-install
+
+    # - run: npm ci
+    # - run: npm run build --if-present
+    # - run: npm test
