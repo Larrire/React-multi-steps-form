@@ -1,37 +1,37 @@
 // Context, Reducer, Provider, Hook
-import { createContext, ReactNode, useContext, useReducer } from 'react';
+import { createContext, ReactNode, useContext, useReducer } from "react";
 
 // Types
 
 type State = {
-  currentStep: number,
-  name: string,
-  level: 0 | 1,
-  email: string,
-  github: string
-}
+  currentStep: number;
+  name: string;
+  level: 0 | 1;
+  email: string;
+  github: string;
+};
 
 type Action = {
-  type: FormActions,
-  payload: any,
-}
+  type: FormActions;
+  payload: any;
+};
 
 type ContextType = {
-  state: State,
+  state: State;
   dispatch: (action: Action) => void;
-}
+};
 
 type FormProviderProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 const initialData: State = {
   currentStep: 0,
-  name: '',
+  name: "",
   level: 0,
-  email: '',
-  github: ''
-}
+  email: "",
+  github: "",
+};
 
 // Context
 const FormContext = createContext<ContextType | undefined>(undefined);
@@ -46,40 +46,36 @@ export enum FormActions {
 }
 
 const formReducer = (state: State, action: Action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FormActions.setCurrentStep:
-      return {...state, currentStep: action.payload};
+      return { ...state, currentStep: action.payload };
     case FormActions.setName:
-      return {...state, name: action.payload};
+      return { ...state, name: action.payload };
     case FormActions.setLevel:
-      return {...state, level: action.payload};
+      return { ...state, level: action.payload };
     case FormActions.setEmail:
-      return {...state, email: action.payload};
+      return { ...state, email: action.payload };
     case FormActions.setGithub:
-      return {...state, github: action.payload};
+      return { ...state, github: action.payload };
     default:
       return state;
   }
-}
+};
 
 // Provider
-export const FormProvider = ({children}: FormProviderProps) => {
+export const FormProvider = ({ children }: FormProviderProps) => {
   const [state, dispatch] = useReducer(formReducer, initialData);
 
-  const value = {state, dispatch}
+  const value = { state, dispatch };
 
-  return (
-    <FormContext.Provider value={value}>
-      {children}
-    </FormContext.Provider>
-  )
-}
+  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+};
 
 // Context Hook
 export const useForm = () => {
   const context = useContext(FormContext);
-  if(context === undefined){
-    throw new Error('useForm precisa ser usado dentro do FormProvider');
+  if (context === undefined) {
+    throw new Error("useForm precisa ser usado dentro do FormProvider");
   }
   return context;
-}
+};

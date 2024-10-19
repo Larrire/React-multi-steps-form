@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div<{ selected: boolean }>`
   display: flex;
-  border: 2px solid ${props => props.selected ? '#25CD89' : '#16195C'};
+  border: 2px solid ${(props) => (props.selected ? "#25CD89" : "#16195C")};
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 15px;
@@ -10,7 +10,7 @@ export const Container = styled.div<{ selected: boolean }>`
   cursor: pointer;
 
   &:hover {
-    border-color: ${props => props.selected ? '#25CD89' : '#496459'};
+    border-color: ${(props) => (props.selected ? "#25CD89" : "#496459")};
   }
 `;
 
@@ -18,7 +18,7 @@ export const Icon = styled.div`
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-color: #191A59;
+  background-color: #191a59;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,5 +38,5 @@ export const Title = styled.div`
 
 export const Description = styled.div`
   font-size: 14px;
-  color: #B8B8D4;
+  color: #b8b8d4;
 `;
