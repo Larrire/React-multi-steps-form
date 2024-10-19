@@ -6,7 +6,7 @@ import { ChangeEvent, useEffect } from "react";
 
 export const FormStepOne = () => {
   const history = useHistory();
-  const { state, dispatch } = useForm()
+  const { state, dispatch } = useForm();
 
   const handleNextStep = () => {
     if (!nameIsValid(state.name)) return invalidNameWarning();
