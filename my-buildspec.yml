@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    finally:
+      - echo This always runs even if the update or install command fails
+
+  pre_build:
+    commands:
+      - npm pkg delete scripts.useless
+      - yarn install --frozen-lockfile
+    finally:
+      - echo This always runs even if the login command fails
+
+  build:
+    commands:
+      - yarn build
+    finally:
+      - echo This always runs even if the install command fails
+
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
